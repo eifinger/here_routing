@@ -1,0 +1,85 @@
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "here_routing"
+version = "1.0.0"
+description = "Asynchronous Python client for the HERE Routing V8 API"
+license = "MIT"
+authors = ["Kevin Stillhammer <kevin.stillhammer@gmail.com>"]
+readme = "README.md"
+repository = "http://github.com/eifinger/here_routing"
+keywords = [
+    "aiohttp",
+    "asyncio",
+    "here",
+    "here-api",
+    "routing"
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "License :: OSI Approved :: MIT License"
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+aiohttp = "^3.8.1"
+async-timeout = "^4.0.2"
+yarl = "^1.7.2"
+
+[tool.poetry.dev-dependencies]
+aresponses = "2.1.5"
+black = "^22.1.0"
+blacken-docs = "^1.12.1"
+coverage = {version = "^6.3", extras = ["toml"]}
+bandit = "^1.7.2"
+codecov = "^2.1.12"
+codespell = "^2.1.0"
+darglint = "^1.8.1"
+flake8 = "^4.0.1"
+flake8-bandit = "^3.0.0"
+flake8-bugbear = "^22.1.11"
+flake8-builtins = "^1.5.3"
+flake8-comprehensions = "^3.8.0"
+flake8-docstrings = "^1.6.0"
+flake8-eradicate = "^1.2.0"
+flake8-markdown = "^0.3.0"
+flake8-simplify = "^0.18.1"
+mypy = "^0.941"
+pre-commit = "^2.17.0"
+pre-commit-hooks = "^4.1.0"
+pytest = "^7.1.0"
+pytest-cov = "^3.0.0"
+pytest-asyncio = "^0.18.2"
+pytest-mock = "^3.7.0"
+pylint = "^2.12.2"
+pyupgrade = "^2.31.1"
+safety = "^1.10.3"
+vulture = "^2.3"
+yamllint = "^1.26.3"
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report term-missing --cov-report xml --cov=here_routing tests"
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:"]
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.vulture]
+min_confidence = 80
+paths = ["here_routing", "tests"]
+
+[tool.semantic_release]
+version_toml = "pyproject.toml:tool.poetry.version"
+build_command = "pip install poetry && poetry build"
+commit_subject = "chore(release): {version}"
+branch = "main"

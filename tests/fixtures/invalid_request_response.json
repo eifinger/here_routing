@@ -1,0 +1,8 @@
+{
+    "title": "Invalid request",
+    "status": 400,
+    "code": "E605013",
+    "cause": "Spans requested but no polyline requested",
+    "action": "",
+    "correlationId": "5d963bc7-07f3-4049-a96c-d37806b83f16"
+}
