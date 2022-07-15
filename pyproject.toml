@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "here_routing"
-version = "0.0.0"
+version = "0.1.0"
 description = "Asynchronous Python client for the HERE Routing V8 API"
 license = "MIT"
 authors = ["Kevin Stillhammer <kevin.stillhammer@gmail.com>"]
