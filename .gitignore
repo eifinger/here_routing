@@ -112,5 +112,5 @@ node_modules/
 # Exclude poetry.lock because this is a library
 poetry.lock
 
-# manual test file
-test.py
+# manual test files
+custom_test/
