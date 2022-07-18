@@ -1,4 +1,4 @@
-"""A module to query the weenect web api."""
+"""A module to query the HERE Routing API v8."""
 from __future__ import annotations
 
 import asyncio
@@ -75,9 +75,9 @@ class HERERoutingApi:
             dictionary. In other cases, it will return the RAW text response.
         Raises:
             HERERoutingConnectionError: An error occurred while communicating
-                with the weenect API (connection issues).
+                with the HERE API (connection issues).
             HERERoutingError: An error occurred while processing the
-                response from the weenect API (invalid data).
+                response from the HERE API (invalid data).
         """
         url = URL.build(scheme=SCHEME, host=API_HOST, path=API_VERSION) / uri
 
@@ -159,9 +159,9 @@ class HERERoutingApi:
             The response from the API.
         Raises:
             HERERoutingConnectionError: An error occurred while communicating
-                with the weenect API (connection issues).
+                with the HERE API (connection issues).
             HERERoutingError: An error occurred while processing the
-                response from the weenect API (invalid data).
+                response from the HERE API (invalid data).
         """
         params: MutableMapping[str, str | List[str]] = {
             "transportMode": transport_mode.value,
