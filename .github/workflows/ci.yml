@@ -64,7 +64,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Python Semantic Release
-        uses: browniebroke/python-semantic-release@fix/version-parsing-commit
+        uses: eifinger/python-semantic-release@fix/ignore-deb-version-commits
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repository_username: __token__
