@@ -183,7 +183,13 @@ class HERERoutingApi:
         if arrival_time is not None:
             params["arrivalTime"] = arrival_time.isoformat(timespec="seconds")
 
-        return await self.request(uri=ROUTES_PATH, params=params)
+        response = await self.request(uri=ROUTES_PATH, params=params)
+
+        if len(response["routes"]) < 1:
+            raise HERERoutingError(
+                ",".join(notice["title"] for notice in response["notices"])
+            )
+        return response
 
     async def close(self) -> None:
         """Close open client session."""

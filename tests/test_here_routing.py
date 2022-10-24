@@ -114,6 +114,32 @@ async def test_invalid_request(aresponses):
         assert "Spans requested but no polyline requested" in str(error.value)
 
 
+@pytest.mark.asyncio
+async def test_no_route_found(aresponses):
+    """Test that a no route found response throws HERERoutingError."""
+    aresponses.add(
+        API_HOST,
+        f"{API_VERSION}/{ROUTES_PATH}",
+        "GET",
+        aresponses.Response(
+            text=load_json_fixture("no_route_response.json"),
+            status=200,
+            content_type="application/json",
+        ),
+    )
+    async with aiohttp.ClientSession() as session:
+        with pytest.raises(HERERoutingError) as error:
+            here_api = HERERoutingApi(api_key="key", session=session)
+            await here_api.route(
+                transport_mode=TransportMode.CAR,
+                origin=Place(latitude=50.12778680095556, longitude=8.582081794738771),
+                destination=Place(
+                    latitude=50.060940891421765, longitude=8.336477279663088
+                ),
+            )
+        assert "Couldn't find a route" in str(error.value)
+
+
 def load_json_fixture(filename: str) -> str:
     """Load a fixture."""
     path = os.path.join(os.path.dirname(__file__), "fixtures", filename)
