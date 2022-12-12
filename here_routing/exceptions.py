@@ -11,3 +11,7 @@ class HERERoutingConnectionError(HERERoutingError):
 
 class HERERoutingUnauthorizedError(HERERoutingError):
     """HERE routing unauthorized exception."""
+
+
+class HERERoutingTooManyRequestsError(HERERoutingError):
+    """HERE routing exception wrapping HTTP 429."""
