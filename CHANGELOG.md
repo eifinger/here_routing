@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2022-12-12)
+### Feature
+* Add HERERoutingTooManyRequestsError ([`9e0af11`](https://github.com/eifinger/here_routing/commit/9e0af11009df7586d06d431319ac410d30d76681))
+
 ## v0.1.1 (2022-10-24)
 ### Fix
 * Handle errors with HTTP 200 response code ([`8114ad4`](https://github.com/eifinger/here_routing/commit/8114ad4eb1c308f39c589abe5baf9478a3c5cece))
