@@ -32,9 +32,9 @@ aiohttp = "^3.8.1"
 async-timeout = "^4.0.2"
 yarl = "^1.7.2"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 aresponses = "2.1.6"
-black = "^22.1.0"
+black = "^22.12.0"
 blacken-docs = "^1.12.1"
 coverage = {version = "^6.3", extras = ["toml"]}
 bandit = "^1.7.2"
@@ -57,7 +57,7 @@ pytest = "^7.1.0"
 pytest-cov = "^4.0.0"
 pytest-asyncio = "^0.20.1"
 pytest-mock = "^3.7.0"
-pylint = "^2.12.2"
+pylint = "^2.15.8"
 pyupgrade = "^3.0.0"
 safety = "^2.0.0"
 vulture = "^2.3"

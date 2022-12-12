@@ -15,6 +15,7 @@ from yarl import URL
 from .exceptions import (
     HERERoutingConnectionError,
     HERERoutingError,
+    HERERoutingTooManyRequestsError,
     HERERoutingUnauthorizedError,
 )
 from .model import Place, Return, RoutingMode, Spans, TransportMode, UnitSystem
@@ -119,6 +120,10 @@ class HERERoutingApi:
 
             if response.status == 401:
                 raise HERERoutingUnauthorizedError(
+                    json.loads(decoded_contents)["error_description"]
+                )
+            if response.status == 429:
+                raise HERERoutingTooManyRequestsError(
                     json.loads(decoded_contents)["error_description"]
                 )
 

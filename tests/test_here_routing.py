@@ -5,7 +5,11 @@ from datetime import datetime
 import aiohttp
 import pytest
 
-from here_routing.exceptions import HERERoutingError, HERERoutingUnauthorizedError
+from here_routing.exceptions import (
+    HERERoutingError,
+    HERERoutingTooManyRequestsError,
+    HERERoutingUnauthorizedError,
+)
 from here_routing.here_routing import API_HOST, API_VERSION, ROUTES_PATH, HERERoutingApi
 from here_routing.model import Place, Return, Spans, TransportMode
 
@@ -112,6 +116,32 @@ async def test_invalid_request(aresponses):
                 ),
             )
         assert "Spans requested but no polyline requested" in str(error.value)
+
+
+@pytest.mark.asyncio
+async def test_429_too_many_requests(aresponses):
+    """Test that a invalid request throws HERETransitTooManyRequestsError."""
+    aresponses.add(
+        API_HOST,
+        f"{API_VERSION}/{ROUTES_PATH}",
+        "GET",
+        aresponses.Response(
+            text=load_json_fixture("too_many_requests_response.json"),
+            status=429,
+            content_type="application/json",
+        ),
+    )
+    async with aiohttp.ClientSession() as session:
+        with pytest.raises(HERERoutingTooManyRequestsError) as error:
+            here_api = HERERoutingApi(api_key="key", session=session)
+            await here_api.route(
+                transport_mode=TransportMode.CAR,
+                origin=Place(latitude=150.12778680095556, longitude=8.582081794738771),
+                destination=Place(
+                    latitude=50.060940891421765, longitude=8.336477279663088
+                ),
+            )
+        assert "Rate limit for this service has been reached" in str(error.value)
 
 
 @pytest.mark.asyncio
