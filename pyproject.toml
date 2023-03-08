@@ -27,41 +27,26 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-aiohttp = "^3.8.1"
+python = "^3.10"
+aiohttp = "^3.8.4"
 async-timeout = "^4.0.2"
-yarl = "^1.7.2"
+yarl = "^1.8.2"
 
 [tool.poetry.group.dev.dependencies]
 aresponses = "2.1.6"
 black = "^22.12.0"
-blacken-docs = "^1.12.1"
-coverage = {version = "^6.3", extras = ["toml"]}
-bandit = "^1.7.2"
-codecov = "^2.1.12"
-codespell = "^2.1.0"
-darglint = "^1.8.1"
-flake8 = "^4.0.1"
-flake8-bandit = "^3.0.0"
-flake8-bugbear = "^22.1.11"
-flake8-builtins = "^2.0.0"
-flake8-comprehensions = "^3.8.0"
-flake8-docstrings = "^1.6.0"
-flake8-eradicate = "^1.2.0"
-flake8-markdown = "^0.3.0"
-flake8-simplify = "^0.19.2"
+blacken-docs = "^1.13.0"
+codespell = "^2.2.2"
 mypy = "^0.991"
-pre-commit = "^2.17.0"
-pre-commit-hooks = "^4.1.0"
-pytest = "^7.1.0"
+pre-commit = "^2.21.0"
+pre-commit-hooks = "^4.4.0"
+pytest = "^7.2.2"
 pytest-cov = "^4.0.0"
-pytest-asyncio = "^0.20.1"
-pytest-mock = "^3.7.0"
-pylint = "^2.15.8"
-pyupgrade = "^3.0.0"
-safety = "^2.0.0"
-vulture = "^2.3"
-yamllint = "^1.26.3"
+pytest-asyncio = "^0.20.3"
+pytest-mock = "^3.10.0"
+vulture = "^2.7"
+yamllint = "^1.29.0"
+ruff = "^0.0.192"
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report term-missing --cov-report xml --cov=here_routing tests"
@@ -70,9 +55,21 @@ addopts = "--cov --cov-report term-missing --cov-report xml --cov=here_routing t
 show_missing = true
 exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:"]
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
+[tool.ruff]
+ignore = ['E501']
+line-length = 88
+select = [
+    'B',
+    'B9',
+    'C',
+    'E',
+    'F',
+    'W',
+]
+fix = true
+
+[tool.ruff.mccabe]
+max-complexity = 12
 
 [tool.vulture]
 min_confidence = 80
