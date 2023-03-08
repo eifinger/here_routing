@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.0 (2023-03-08)
+### Fix
+* Bump versions and require python >3.10 ([#36](https://github.com/eifinger/here_routing/issues/36)) ([`1e1f0f1`](https://github.com/eifinger/here_routing/commit/1e1f0f1993b41bd4643cec25957e699576cc53c2))
+
+### Breaking
+* Require Python3.10 or later ([`1e1f0f1`](https://github.com/eifinger/here_routing/commit/1e1f0f1993b41bd4643cec25957e699576cc53c2))
+
 ## v0.2.0 (2022-12-12)
 ### Feature
 * Add HERERoutingTooManyRequestsError ([`9e0af11`](https://github.com/eifinger/here_routing/commit/9e0af11009df7586d06d431319ac410d30d76681))
