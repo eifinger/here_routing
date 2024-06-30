@@ -7,7 +7,8 @@ import json
 import socket
 from datetime import datetime
 from importlib import metadata
-from typing import Any, List, MutableMapping
+from typing import Any
+from collections.abc import MutableMapping
 
 import aiohttp
 import async_timeout
@@ -39,15 +40,7 @@ class HERERoutingApi:
         session: aiohttp.client.ClientSession | None = None,
         user_agent: str | None = None,
     ) -> None:
-        """Initialize connection with HERE Routing.
-        Class constructor for setting up an HERERoutingApi object to
-        communicate with the HERE Routing API.
-        Args:
-            api_key: A key generated specifically to authenticate API requests.
-            request_timeout: Max timeout to wait for a response from the API.
-            session: Optional, shared, aiohttp client session.
-            user_agent: Defaults to here_routing/<version>.
-        """
+        """Initialize connection with HERE Routing."""
         self._session = session
         self._api_key = api_key
         self._close_session = False
@@ -61,10 +54,11 @@ class HERERoutingApi:
     async def request(
         self,
         uri: str,
-        params: MutableMapping[str, str | List[str]],
+        params: MutableMapping[str, str | list[str]],
         method: str = "GET",
     ) -> Any:
         """Handle a request to the HERE Routing API.
+
         Make a request against the HERE Routing API and handles the response.
         Args:
             uri: The request URI on the HERE Routing API to call.
@@ -72,15 +66,18 @@ class HERERoutingApi:
             data: RAW HTTP request data to send with the request.
             json_data: Dictionary of data to send as JSON with the request.
             params: Mapping of request parameters to send with the request.
+
         Returns:
             The response from the API. In case the response is a JSON response,
             the method will return a decoded JSON response as a Python
             dictionary. In other cases, it will return the RAW text response.
+
         Raises:
             HERERoutingConnectionError: An error occurred while communicating
                 with the HERE API (connection issues).
             HERERoutingError: An error occurred while processing the
                 response from the HERE API (invalid data).
+
         """
         url = URL.build(scheme=SCHEME, host=API_HOST, path=API_VERSION) / uri
 
@@ -121,13 +118,9 @@ class HERERoutingApi:
             response.close()
 
             if response.status == 401:
-                raise HERERoutingUnauthorizedError(
-                    json.loads(decoded_contents)["error_description"]
-                )
+                raise HERERoutingUnauthorizedError(json.loads(decoded_contents)["error_description"])
             if response.status == 429:
-                raise HERERoutingTooManyRequestsError(
-                    json.loads(decoded_contents)["error_description"]
-                )
+                raise HERERoutingTooManyRequestsError(json.loads(decoded_contents)["error_description"])
 
             raise HERERoutingError(response.status, json.loads(decoded_contents))
 
@@ -142,13 +135,14 @@ class HERERoutingApi:
         alternatives: int = 0,
         units: UnitSystem = UnitSystem.METRIC,
         lang: str = "en-US",
-        return_values: List[Return] | None = None,
-        spans: List[Spans] | None = None,
-        via: List[Place] | None = None,
+        return_values: list[Return] | None = None,
+        spans: list[Spans] | None = None,
+        via: list[Place] | None = None,
         departure_time: datetime | None = None,
         arrival_time: datetime | None = None,
     ) -> Any:
         """Get the route.
+
         Args:
             transport_mode: The TransportMode to use.
             origin: Latitude and longitude of the origin.
@@ -162,15 +156,18 @@ class HERERoutingApi:
             via: List of waypoints the route should route over.
             departure_time: Departure time.
             arrival_time: Arrival time.
+
         Returns:
             The response from the API.
+
         Raises:
             HERERoutingConnectionError: An error occurred while communicating
                 with the HERE API (connection issues).
             HERERoutingError: An error occurred while processing the
                 response from the HERE API (invalid data).
+
         """
-        params: MutableMapping[str, str | List[str]] = {
+        params: MutableMapping[str, str | list[str]] = {
             "transportMode": transport_mode.value,
             "origin": f"{origin.latitude},{origin.longitude}",
             "destination": f"{destination.latitude},{destination.longitude}",
@@ -193,9 +190,7 @@ class HERERoutingApi:
         response = await self.request(uri=ROUTES_PATH, params=params)
 
         if len(response["routes"]) < 1:
-            raise HERERoutingError(
-                ",".join(notice["title"] for notice in response["notices"])
-            )
+            raise HERERoutingError(",".join(notice["title"] for notice in response["notices"]))
         return response
 
     async def close(self) -> None:
@@ -204,15 +199,9 @@ class HERERoutingApi:
             await self._session.close()
 
     async def __aenter__(self) -> HERERoutingApi:
-        """Async enter.
-        Returns:
-            The HERERoutingApi object.
-        """
+        """Async enter."""
         return self
 
     async def __aexit__(self, *_exc_info) -> None:
-        """Async exit.
-        Args:
-            _exc_info: Exec type.
-        """
+        """Async exit."""
         await self.close()
