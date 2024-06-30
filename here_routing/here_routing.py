@@ -1,4 +1,5 @@
 """A module to query the HERE Routing API v8."""
+
 from __future__ import annotations
 
 import asyncio
@@ -24,6 +25,8 @@ SCHEME = "https"
 API_HOST = "router.hereapi.com"
 API_VERSION = "/v8"
 ROUTES_PATH = "routes"
+
+LIB_VERSION = metadata.version(__package__)
 
 
 class HERERoutingApi:
@@ -53,8 +56,7 @@ class HERERoutingApi:
         self.user_agent = user_agent
 
         if user_agent is None:
-            version = metadata.version(__package__)
-            self.user_agent = f"here_routing/{version}"
+            self.user_agent = f"here_routing/{LIB_VERSION}"
 
     async def request(
         self,
