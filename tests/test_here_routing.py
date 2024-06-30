@@ -61,9 +61,7 @@ async def test_invalid_key(aresponses):
             await here_api.route(
                 transport_mode=TransportMode.CAR,
                 origin=Place(latitude=50.12778680095556, longitude=8.582081794738771),
-                destination=Place(
-                    latitude=50.060940891421765, longitude=8.336477279663088
-                ),
+                destination=Place(latitude=50.060940891421765, longitude=8.336477279663088),
             )
 
 
@@ -86,9 +84,7 @@ async def test_malformed_request(aresponses):
             await here_api.route(
                 transport_mode=TransportMode.CAR,
                 origin=Place(latitude=50.12778680095556, longitude=8.582081794738771),
-                destination=Place(
-                    latitude=50.060940891421765, longitude=8.336477279663088
-                ),
+                destination=Place(latitude=50.060940891421765, longitude=8.336477279663088),
             )
 
 
@@ -111,9 +107,7 @@ async def test_invalid_request(aresponses):
             await here_api.route(
                 transport_mode=TransportMode.CAR,
                 origin=Place(latitude=50.12778680095556, longitude=8.582081794738771),
-                destination=Place(
-                    latitude=50.060940891421765, longitude=8.336477279663088
-                ),
+                destination=Place(latitude=50.060940891421765, longitude=8.336477279663088),
             )
         assert "Spans requested but no polyline requested" in str(error.value)
 
@@ -137,9 +131,7 @@ async def test_429_too_many_requests(aresponses):
             await here_api.route(
                 transport_mode=TransportMode.CAR,
                 origin=Place(latitude=150.12778680095556, longitude=8.582081794738771),
-                destination=Place(
-                    latitude=50.060940891421765, longitude=8.336477279663088
-                ),
+                destination=Place(latitude=50.060940891421765, longitude=8.336477279663088),
             )
         assert "Rate limit for this service has been reached" in str(error.value)
 
@@ -163,9 +155,7 @@ async def test_no_route_found(aresponses):
             await here_api.route(
                 transport_mode=TransportMode.CAR,
                 origin=Place(latitude=50.12778680095556, longitude=8.582081794738771),
-                destination=Place(
-                    latitude=50.060940891421765, longitude=8.336477279663088
-                ),
+                destination=Place(latitude=50.060940891421765, longitude=8.336477279663088),
             )
         assert "Couldn't find a route" in str(error.value)
 

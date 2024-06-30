@@ -4,7 +4,7 @@ Asynchronous Python client for the HERE Routing V8 API
 
 [![GitHub Actions](https://github.com/eifinger/here_routing/workflows/CI/badge.svg)](https://github.com/eifinger/here_routing/actions?workflow=CI)
 [![PyPi](https://img.shields.io/pypi/v/here_routing.svg)](https://pypi.python.org/pypi/here_routing)
-[![PyPi](https://img.shields.io/pypi/l/here_routing.svg)](https://github.com/eifinger/here_routing/blob/master/LICENSE)
+[![License](https://img.shields.io/pypi/l/here_routing.svg)](https://github.com/eifinger/here_routing/blob/master/LICENSE)
 [![codecov](https://codecov.io/gh/eifinger/here_routing/branch/master/graph/badge.svg)](https://codecov.io/gh/eifinger/here_routing)
 [![Downloads](https://pepy.tech/badge/here_routing)](https://pepy.tech/project/here_routing)
 
