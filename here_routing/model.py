@@ -4,6 +4,13 @@ from dataclasses import dataclass
 from enum import Enum
 
 
+class TrafficMode(Enum):
+    """Available TrafficMode Values."""
+
+    DISABLED = "disabled"
+    DEFAULT = "default"
+
+
 class TransportMode(Enum):
     """Available TransportModes."""
 

@@ -20,7 +20,7 @@ from .exceptions import (
     HERERoutingTooManyRequestsError,
     HERERoutingUnauthorizedError,
 )
-from .model import Place, Return, RoutingMode, Spans, TransportMode, UnitSystem
+from .model import Place, Return, RoutingMode, Spans, TransportMode, UnitSystem, TrafficMode
 
 SCHEME = "https"
 API_HOST = "router.hereapi.com"
@@ -46,10 +46,7 @@ class HERERoutingApi:
         self._close_session = False
 
         self.request_timeout = request_timeout
-        self.user_agent = user_agent
-
-        if user_agent is None:
-            self.user_agent = f"here_routing/{LIB_VERSION}"
+        self.user_agent = user_agent or f"here_routing/{LIB_VERSION}"
 
     async def request(
         self,
@@ -63,8 +60,6 @@ class HERERoutingApi:
         Args:
             uri: The request URI on the HERE Routing API to call.
             method: HTTP method to use for the request; e.g., GET, POST.
-            data: RAW HTTP request data to send with the request.
-            json_data: Dictionary of data to send as JSON with the request.
             params: Mapping of request parameters to send with the request.
 
         Returns:
@@ -134,6 +129,7 @@ class HERERoutingApi:
         routing_mode: RoutingMode = RoutingMode.FAST,
         alternatives: int = 0,
         units: UnitSystem = UnitSystem.METRIC,
+        traffic_mode: TrafficMode = TrafficMode.DEFAULT,
         lang: str = "en-US",
         return_values: list[Return] | None = None,
         spans: list[Spans] | None = None,
@@ -150,6 +146,7 @@ class HERERoutingApi:
             routing_mode: Routing Mode to use. Defaults to RoutingMode.FAST.
             alternatives: Number of alternative routes to return.
             units: Unitsystem to use.
+            traffic_mode: Use traffic and time-aware routing.
             lang: IETF BCP 47 compatible language identifier.
             return_values: HERE Routing API return values to request.
             spans: Information for Spans to request.
@@ -174,6 +171,7 @@ class HERERoutingApi:
             "routingMode": routing_mode.value,
             "alternatives": str(alternatives),
             "units": units.value,
+            "traffic[mode]": traffic_mode.value,
             "lang": lang,
         }
         if return_values is not None:
