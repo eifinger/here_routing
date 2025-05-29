@@ -11,7 +11,7 @@ Asynchronous Python client for the HERE Routing V8 API
 ## Installation
 
 ```bash
-pip install here_routing
+uv add install here_routing
 ```
 
 ## Usage
