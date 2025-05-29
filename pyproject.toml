@@ -34,9 +34,8 @@ requires-python = ">= 3.10"
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.rye]
-managed = true
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "aresponses>=3.0.0",
     "codespell>=2.3.0",
     "mypy>=1.10.1",
