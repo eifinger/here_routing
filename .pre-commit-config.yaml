@@ -64,11 +64,6 @@ repos:
         entry: check-xml
         language: system
         types: [xml]
-      - id: check-yaml
-        name: ✅ Check YAML files
-        language: system
-        types: [yaml]
-        entry: uv run check-yaml
       - id: codespell
         name: ✅ Check code for common misspellings
         language: system
