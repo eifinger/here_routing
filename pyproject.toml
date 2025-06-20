@@ -7,7 +7,6 @@ authors = [
     { name = "Kevin Stillhammer", email = "kevin.stillhammer@gmail.com" }
 ]
 readme = "README.md"
-repository = "http://github.com/eifinger/here_routing"
 keywords = [
     "aiohttp",
     "asyncio",
@@ -29,6 +28,8 @@ dependencies = [
     "yarl>=1.20.0",
 ]
 requires-python = ">= 3.10"
+[project.urls]
+repository = "https://github.com/eifinger/here_routing"
 
 [build-system]
 requires = ["hatchling"]
