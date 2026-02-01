@@ -20,13 +20,13 @@ jobs:
       - uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c5af426746bb
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Cache pre-commit
-        uses: actions/cache@4.2.2
+      - name: Cache prek
+        uses: actions/cache@v4
         with:
-          path: ~/.cache/pre-commit
-          key: pre-commit-|${{ matrix.python-version }}|${{ hashFiles('.pre-commit-config.yaml') }}
+          path: ~/.cache/prek
+          key: prek-|${{ matrix.python-version }}|${{ hashFiles('.pre-commit-config.yaml') }}
       - name: Lint
         run: |
-          uv run pre-commit run --all-files
+          uv run prek run --all-files
       - name: Lint GitHub Actions
         uses: eifinger/actionlint-action@v1
